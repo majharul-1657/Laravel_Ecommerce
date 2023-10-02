@@ -51,7 +51,7 @@
 								<ul class="section-tab-nav tab-nav">
                                     @foreach ($categories as $category )
 
-									<li class="active"><a data-toggle="tab" href="#tab1">{{$category->name}}</a></li>
+									<li class="active"><a href="{{url('/product_by_cat/'.$category->id)}}">{{$category->name}}</a></li>
                                     @endforeach
 
 								</ul>
@@ -87,7 +87,7 @@
 											</div>
 										</a>
 											<div class="product-body">
-												<p class="product-category">{{$product->category->name}}</p>
+												<p class="product-category">{{$product->category}}</p>
 												<h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
 												<h4 class="product-price">	&#2547;{{$product->price}} <del class="product-old-price">	&#2547;{{$product->price}}</del></h4>
 												<div class="product-rating">
@@ -103,9 +103,14 @@
 													<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
 												</div>
 											</div>
+                                             <form action="{{url('add-to-cart')}}" method="POST">
+                                                @csrf
 											<div class="add-to-cart">
+                                                <input type="hidden" value="1" name="quantity">
+                                                <input type="hidden" value="{{$product->id}}" name="id">
 												<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
 											</div>
+                                        </form>
 										</div>
 										<!-- /product -->
 

@@ -63,39 +63,37 @@
                         <!-- /Wishlist -->
 
                         <!-- Cart -->
+                             @php
+                               $cart_array = cardArray();
+                             @endphp
+
+
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Your Cart</span>
-                                <div class="qty">3</div>
+                                <div class="qty"><?= count($cart_array )?></div>
                             </a>
                             <div class="cart-dropdown">
                                 <div class="cart-list">
+                                    @foreach ($cart_array as $v_add_cart)
+
+
                                     <div class="product-widget">
                                         <div class="product-img">
                                             <img src="./img/product01.png" alt="">
                                         </div>
                                         <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                                            <h3 class="product-name"><a href="#">{{$v_add_cart['name']}}</a></h3>
+                                            <h4 class="product-price"><span class="qty">{{$v_add_cart['quantity']}}</span>&#2547;{{$v_add_cart['price']}}</h4>
                                         </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
-
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="./img/product02.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                        </div>
-                                        <button class="delete"><i class="fa fa-close"></i></button>
-                                    </div>
+                                        <a href="{{url('/delete-cart'.$v_add_cart['id'])}}" class="delete"><i class="fa fa-close"></i></a>
+                                     </div>
+                                    @endforeach
                                 </div>
                                 <div class="cart-summary">
-                                    <small>3 Item(s) selected</small>
-                                    <h5>SUBTOTAL: $2940.00</h5>
+                                    <small><?= count($cart_array )?> Item(s) selected</small>
+                                    <h5>SUBTOTAL: &#2547; {{cart::getTotal()}}</h5>
                                 </div>
                                 <div class="cart-btns">
                                     <a href="">View Cart</a>

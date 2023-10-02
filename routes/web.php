@@ -10,6 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\checkoutController;
+use App\Http\Controllers\cardcontroller;
 
 
 // use Illuminate\Support\Facades\homecontroller;
@@ -91,3 +92,12 @@ Route::get('/dashbord',[Admincontroller::class, 'dashbord']);
  Route::get('/checkout',[checkoutController::class, 'index']);
 
 //  Route::get('/login-check',[checkoutController::class, 'login_check']);
+
+
+Route::get('/product_by_cat/{id}',[homecontroller::class, 'product_cat']);
+
+
+// add to card
+
+Route::post('/add-to-cart',[cardcontroller::class, 'add_to_cart']);
+Route::get('/delete-cart{id}',[cardcontroller::class, 'delete']);

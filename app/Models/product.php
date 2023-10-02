@@ -29,6 +29,19 @@ class product extends Model
         return $this->belongsTo(unit::class,'unit_id');
      }
 
- 
+     public static function catProductCount($cat_id){
+        $catCount=product::where('cat_id',$cat_id)->where('status',1)->count();
+        return $catCount;
+     }
+     public static function subcatProductCount($subcat_id){
+        $subcatCount=product::where('subcat_id',$subcat_id)->where('ststus',1)->count();
+       return $subcatCount;
+    }
+
+    public static function brandProductCount($br_id){
+        $brandCount=product::where('br_id',$br_id)->where('status',1)->count();
+        return $brandCount;
+    }
+
 
 }

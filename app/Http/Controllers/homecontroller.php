@@ -34,12 +34,22 @@ class homecontroller extends Controller
         $brands=brand::all();
         $units=unit ::all();
         $products=product::findOrFail($id);
-
-        return view('fontend.pages.view_details',compact('categories','subcategories','brands','units','products'));
+        $cat_id = $products->cat_id;
+        $related_products=product::where('cat_id',$cat_id)->limit(4)->get();
+        return view('fontend.pages.view_details',compact('categories','subcategories','brands','units','products','related_products'));
 
     }
+public function product_cat($id){
 
+    $categories = category::all();
+    $subcategories = category::all();
+    $brands = brand::all();
+     $products = product::all();
 
+    //  where('status',1)->where('cat_id',$id)->limit(12)->get();
+    return view('fontend.pages.product_by_cat',compact('categories','subcategories','brands','products'));
+
+}
 
 
     public function login_check(){
